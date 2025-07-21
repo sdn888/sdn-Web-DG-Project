@@ -7,13 +7,24 @@
 {% block content %}
 <h1 class="mb-4">Новостная страница</h1>
 
-{% for new in news %}
-	<div class="card mb-4 p-3">
-		<h3>{{ new.title }}</h3>
-		<p><strong>Кратко:</strong> {{ new.short_description }}</p>
-		<p><strong>Текст:</strong> {{ new.text }}</p>
-		<p><small><em>Автор: {{ new.author.username }} | Опубликовано: {{ new.pub_date|date:"d.m.Y H:i" }}</em></small></p>
-	</div>
-{% endfor %}
+{% if user.is_authenticated %}
+    <p>Вы вошли как <strong>{{ user.username }}</strong></p>
+{% else %}
+    <p>Вы не авторизованы. <a href="{% url 'login' %}">Войти</a></p>
+{% endif %}
+
+{% if posts %}
+    {% for new in posts %}
+        <div class="card mb-4 p-3">
+            <h3>{{ new.title }}</h3>
+            <p><strong>Кратко:</strong> {{ new.short_description }}</p>
+            <p><strong>Текст:</strong> {{ new.text }}</p>
+            <p><small><em>Автор: {{ new.author.username }} | Опубликовано: {{ new.pub_date|date:"d.m.Y H:i" }}</em></small></p>
+        </div>
+    {% endfor %}
+{% else %}
+    <h4>Новостей ещё нет.</h4>
+{% endif %}
 
 {% endblock %}
+

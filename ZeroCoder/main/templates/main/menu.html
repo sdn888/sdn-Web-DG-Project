@@ -12,6 +12,10 @@
         <a class="nav-link {% if request.path == '/news_home/' %}active{% endif %}" href="{% url 'news_home' %}">Новостная страница</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {% if request.path == '/add_news/' %}active{% endif %}" href="{% url 'add_news' %}">Добавить новость</a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="{% url 'contact' %}">Контакты</a>
     </li>
 </ul>
